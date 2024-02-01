@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -15,21 +16,23 @@ class PeminjamanView extends GetView<PeminjamanController> {
         title: const Text('PeminjamanView'),
         centerTitle: true,
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: ()=> Get.toNamed(Routes.ADD_PEMINJAMAN), child: Icon(Icons.add),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: ()=> Get.toNamed(Routes.ADD_PEMINJAMAN), child: Icon(Icons.add),
+      // ),
       body: controller.obx((state) => ListView.separated(
         itemCount: state!.length,
         itemBuilder: (context, index){
           DataPinjam dataPinjam = state[index];
           return ListTile(
-            title: Text("Buku ${dataPinjam.book?.judul}"),
-            subtitle: Text("Tanggal Pinjam ${dataPinjam.tanggalPinjam} \nTanggal Kembali ${dataPinjam.tanggalKembali}"),
+            title: Text("Peminjaman"),
+            subtitle: Text("Buku : ${dataPinjam.book?.judul}\nTanggal Pinjam ${dataPinjam.tanggalPinjam} \nTanggal Kembali ${dataPinjam.tanggalKembali}"),
 
           );
         },
         separatorBuilder: (context , index) => Divider(),
-      ))
+      ),
+      onLoading: Center(child: CupertinoActivityIndicator())
+      )
     );
   }
 }

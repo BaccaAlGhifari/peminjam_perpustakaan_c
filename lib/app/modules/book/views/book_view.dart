@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../data/model/response_book.dart';
+import '../../../routes/app_pages.dart';
 import '../controllers/book_controller.dart';
 
 class BookView extends GetView<BookController> {
@@ -21,6 +22,9 @@ class BookView extends GetView<BookController> {
           return ListTile(
           title: Text("${dataBook.judul}"),
           subtitle: Text("Penulis ${dataBook.penulis}\n${dataBook.penerbit} - ${dataBook.tahunTerbit}"),
+            trailing: ElevatedButton(onPressed: ()=>Get.toNamed(Routes.ADD_PEMINJAMAN, parameters: {
+              'id':(dataBook.id??0).toString(),'judul':dataBook.judul??'-'
+            }), child: Text("PINJAM"),),
     );
     },
     separatorBuilder: (context , index) => Divider(),
